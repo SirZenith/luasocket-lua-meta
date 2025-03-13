@@ -7,13 +7,7 @@ socket.http = M
 
 ---@class LuaSocket.Socket
 
----@alias LuaSocket.CreateFunc fun(): LuaSocket.Socket
-
----@class ltn12.Source
-
----@class ltn12.Sink
-
----@alias ltn12.StepFunc fun(src: ltn12.Source, snk: ltn12.Sink)
+---@alias LuaSocket.CreateFunc fun(param?: table): LuaSocket.Socket
 
 ---@class LuaSocket.HTTPRequest
 ---@field url string
@@ -23,7 +17,9 @@ socket.http = M
 ---@field source? ltn12.Source
 ---@field step? ltn12.StepFunc
 ---@field target? string[] # For a request constructed from string, this will be the table used as `sink`.
----@field create LuaSocket.CreateFunc
+---@field proxy? string
+---@field redirect? boolean
+---@field create? LuaSocket.CreateFunc
 
 -- Timeout for HTTP requests.
 ---@type number
@@ -35,11 +31,12 @@ M.USERAGENT = nil
 
 ---@class LuaSocket.HTTPSocket
 ---@field c LuaSocket.Socket
+---@field try fun(action: function): any
 local HTTPSocket = {}
 
 ---@param host string
----@param port number
----@param create fun(): LuaSocket.Socket
+---@param port string | number
+---@param create LuaSocket.CreateFunc
 ---@return LuaSocket.HTTPSocket
 function M.open(host, port, create)
 end
