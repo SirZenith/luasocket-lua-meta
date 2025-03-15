@@ -41,7 +41,8 @@ end
 -- NOTE: the leading '/' in {/<path>} is considered part of <path>
 ---@param url string # uniform resource locator of request
 ---@param default? table # default values for each field
----@return LuaSocket.URL
+---@return LuaSocket.URL?
+---@return string? err
 function _M.parse(url, default)
 end
 
